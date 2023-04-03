@@ -72,11 +72,14 @@ const metronomeLoop = new Tone.Loop((time) => {
   metronome.triggerAttackRelease('E4', '32n', time);
 }, '8n');
 
-const noteLoop = new Tone.Loop(eLoop, '4n');
-function eLoop(time) {
-  console.log('TUM');
-  synth.triggerAttackRelease('E3', '8n', time);
-}
+let loopNotes = ['E3', null, 'E3', null, null, 'E3', null, 'E3', null];
+const noteSeq = new Tone.Sequence(
+  (time, note) => {
+    synth.triggerAttackRelease(note, '4n', time);
+  },
+  loopNotes,
+  '8n'
+);
 
 /* CONNECTIONS */
 synth.connect(filter);
@@ -91,10 +94,10 @@ function returnWave(w) {
 }
 
 /* LOOPS*/
-//metronomeLoop.start(0);
+metronomeLoop.start(0);
 //seq.start(0);
 //loop.start(0);
-noteLoop.start(0);
+noteSeq.start(0);
 
 /* TRANSPORT */
 Tone.Transport.bpm.value = bpm;
