@@ -3,6 +3,8 @@ console.clear();
 console.log('trackerplatz');
 
 /* --------------TODO--------------------
+  - 
+  - Stablish the Core Base Loop
   - Clickable checkmarks sequencer with layers of music
   - Play sequences at a quarter note
   - Looped samples
