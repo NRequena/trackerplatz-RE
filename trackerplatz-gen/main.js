@@ -45,6 +45,7 @@ const metronome = new Tone.Synth({
 const metronomeGain = new Tone.Gain(0.1).toDestination();
 metronome.connect(metronomeGain);
 const filter = new Tone.Filter(400, 'lowpass');
+const gainNode = new Tone.Gain(0.2);
 
 playButton.addEventListener('click', () => {
   //audioPlayer.currentTime = 0; // set the current time to the beginning
@@ -66,35 +67,16 @@ function playSample(sample) {
   sample.play();
 }
 
-//TimeLog in EightNotes. 9 per Bar
 const metronomeLoop = new Tone.Loop((time) => {
   console.log(time);
   metronome.triggerAttackRelease('E4', '32n', time);
 }, '8n');
-
-//Downbeat of every bar
-const loop = new Tone.Loop(synthLoop, '4m');
-function synthLoop(time) {
-  console.log('TUUM');
-  synth.triggerAttackRelease('C#2', '3m', time);
-}
 
 const noteLoop = new Tone.Loop(eLoop, '4n');
 function eLoop(time) {
   console.log('TUM');
   synth.triggerAttackRelease('E3', '8n', time);
 }
-
-const seq = new Tone.Sequence(
-  (time, note) => {
-    synth.triggerAttackRelease(note, '1n', time);
-    console.log(note);
-    // subdivisions are given as subarrays
-  },
-  ['C#2', 'B1', 'A1', 'B1', 'G#1']
-);
-
-const gainNode = new Tone.Gain(0.2);
 
 /* CONNECTIONS */
 synth.connect(filter);
@@ -109,7 +91,7 @@ function returnWave(w) {
 }
 
 /* LOOPS*/
-metronomeLoop.start(0);
+//metronomeLoop.start(0);
 //seq.start(0);
 //loop.start(0);
 noteLoop.start(0);
