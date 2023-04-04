@@ -37,11 +37,28 @@ function drawBuffer(wave, color) {
 function draw() {
   background(0);
   if (isPlaying) {
-    drawBuffer();
+    //drawBuffer();
+    fill(255);
+    noStroke();
+    textAlign(CENTER, CENTER);
+    text('PLAYING NOW', width / 2, height / 2);
   } else {
     fill(255);
     noStroke();
     textAlign(CENTER, CENTER);
     text('trackerplatz:RE', width / 2, height / 2);
+  }
+}
+
+function mousePressed() {
+  if (!isPlaying) {
+    console.log('Tone started');
+    Tone.start();
+    Tone.Transport.start();
+    isPlaying = true;
+  } else {
+    console.log('Stop Transport');
+    Tone.Transport.stop();
+    isPlaying = false;
   }
 }
