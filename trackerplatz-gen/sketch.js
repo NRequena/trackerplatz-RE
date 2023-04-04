@@ -3,6 +3,9 @@ console.log('CANVAS ELEMENT');
 
 let isPlaying;
 
+const wave = new Tone.Waveform().toDestination();
+console.log(wave);
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   isPlaying = false;
@@ -37,7 +40,7 @@ function drawBuffer(wave, color) {
 function draw() {
   background(0);
   if (isPlaying) {
-    //drawBuffer();
+    drawBuffer(wave,white);
     fill(255);
     noStroke();
     textAlign(CENTER, CENTER);

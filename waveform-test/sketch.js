@@ -1,4 +1,3 @@
-import './style.css';
 console.log('trackerplatz');
 
 /* --------------TODO--------------------
@@ -14,11 +13,25 @@ console.log('trackerplatz');
   - Add Swing, Humanity.
 --------------------------------------- */
 
-const audioPlayer = document.getElementById('audio-player');
 const bpm = 104;
 const timeSignature = [9, 8];
-//const now = Tone.now();
-let wave;
+
+//PLAY AND STOP BUTTONS
+const playButton = document.getElementById('play-button');
+const pauseButton = document.getElementById('pause-button');
+if(playButton) {
+    playButton.addEventListener('click', () => {
+        console.log('Tone started');
+        Tone.start();
+        Tone.Transport.start();
+    });
+}
+if(pauseButton) {
+    pauseButton.addEventListener('click', () => {
+        console.log('Stop Transport');
+        Tone.Transport.stop();
+    });
+}  
 
 //SYNTH DEFINITIONS
 const synth = new Tone.Synth({
@@ -70,13 +83,6 @@ const metronomeGain = new Tone.Gain(0.1).toDestination();
 metronome.connect(metronomeGain);
 const filter = new Tone.Filter(400, 'lowpass');
 const gainNode = new Tone.Gain(0.2);
-
-
-function playSample(sample) {
-  sample.pause();
-  sample.currentTime = 0; // set the current time to the beginning
-  sample.play();
-}
 
 const metronomeLoop = new Tone.Loop((time) => {
   console.log(time);
@@ -146,22 +152,3 @@ metronomeLoop.start(0);
 /* TRANSPORT */
 Tone.Transport.bpm.value = bpm;
 Tone.Transport.timeSignature = timeSignature;
-
-
-// //PLAY AND STOP BUTTONS
-
-// const playButton = document.getElementById('play-button');
-// const pauseButton = document.getElementById('pause-button');
-
-// playButton.addEventListener('click', () => {
-//   //audioPlayer.currentTime = 0; // set the current time to the beginning
-//   //audioPlayer.play();
-//   console.log('Tone started');
-//   Tone.start();
-//   Tone.Transport.start();
-// });
-// pauseButton.addEventListener('click', () => {
-  //   //audioPlayer.pause();
-  //   console.log('Stop Transport');
-  //   Tone.Transport.stop();
-  // });
