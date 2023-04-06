@@ -1,20 +1,41 @@
 console.log('trackerplatz');
 
 /* --------------TODO--------------------
-  - Get the main 9/8 "E" Sequence Looping correctly
-  - Stablish the Core Base Loop
+  - Get the main 9/8 "E" Sequence Looping correctly- DONE
+  - Stablish the Core Base Loop - DONE
   - Sequencer with Checkboxes each checkbox enables a new Loop element (with certain parameters randomized)
-  - Play sequences at a quarter note
   - Looped samples
   - Markov chain for Harmony
   - Markov chain for Melody
   - Export the Waveform from the MAIN js file to the Sketch JS file. HOW?
   - Randomize Note Intensity, Decay, Release and Sustain.
   - Add Swing, Humanity.
+  - Add MagentaJS (Dunno how)
 --------------------------------------- */
+
+/*
+SELECTABLE ELEMENTS FOR THE SEQUENCER:
+- Base Note (E)
+- Harmonic Base Notes (Pattern of Harmonic Notes)
+- Kick Drum Pattern 1 (Pattern)
+- Kick Drum Pattern 2 (Randomized Pattern with MagentaJS)
+- Pad Synth Waves (Fixed Harmony)
+- Bass Notes Long (Fixed Harmony)
+- Delay Panned Response Melody Notes (Randomized Notes within the scale)
+- Lament like Melody going down (Looped Lament in the scale)
+- Melodic Sad Synth (Akai Sample)
+- Rythmic Guitars with tons of distortion (Build Up)
+- Final Striking Whimper, Hi String note. (Final Note.)
+*/
+
+/*
+P5JS TO DO VISUALS:
+- 
+*/
 
 const bpm = 104;
 const timeSignature = [9, 8];
+const now = Tone.now();
 const mainWave = new Tone.Waveform();
 
 //SYNTH DEFINITIONS
@@ -95,11 +116,11 @@ const eLoop = new Tone.Sequence(
   );
   
   //Downbeat of every bar
-  const bassLoop = new Tone.Loop(synthLoop, '4m');
-  function synthLoop(time) {
-    console.log('TUUM');
-    synthBass.triggerAttackRelease('C#2', '3m', time);
-  }
+const bassLoop = new Tone.Loop(synthLoop, '4m');
+function synthLoop(time) {
+  console.log('TUUM');
+  synthBass.triggerAttackRelease('C#2', '3m', time);
+}
 const baseSeq = new Tone.Sequence(
   (time, note) => {
     synthBass.triggerAttackRelease(note, '3m', time);
@@ -130,7 +151,7 @@ function returnWave(w) {
 //metronomeLoop.start(0);
 //seq.start(0);
 //bassLoop.start(0);
-eLoop.start(0);
+//eLoop.start(now);
 //gSharpLoop.start(0);
 //baseSeq.start(0);
 
